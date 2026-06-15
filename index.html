@@ -15,7 +15,7 @@
         .red-btn { background: #8b0000; border: 2px solid #ff0000; width: 100%; transition: 0.2s; }
         .red-btn:hover { background: #ff0000; transform: scale(0.95); }
         #bigOne { transition: font-size 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: inline-block; color: #00f2ff; }
-        .liminal-frame { width: 100%; height: 200px; background: #050505; margin: 15px 0; display: flex; align-items: center; justify-content: center; border: 2px dashed #00f2ff; position: relative; }
+        .liminal-frame { width: 100%; height: 200px; background: #050505; margin: 15px 0; display: flex; align-items: center; justify-content: center; border: 2px dashed #00f2ff; overflow: hidden; }
         .flicker { animation: blink 1s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
         #voidLog { background: #000; color: #00ff41; padding: 10px; font-size: 0.8em; text-align: left; height: 60px; overflow-y: auto; margin-top: 10px; border: 1px solid #00ff41; }
@@ -46,7 +46,9 @@
 
 <div id="page3" class="page hidden">
     <h1>LIMINAL VIEWER</h1>
-    <div class="liminal-frame"><span id="imgName" class="flicker">liminal1.png</span></div>
+    <div class="liminal-frame">
+        <img id="liminalImg" src="liminal1.png" alt="Liminal" class="flicker" style="max-width: 100%; height: auto;">
+    </div>
     <input type="range" min="1" max="5" value="1" oninput="changeImg(this.value)">
     <br>
     <button onclick="showPage('page1')">BACK</button>
@@ -83,7 +85,7 @@
         document.getElementById(pageId).classList.remove('hidden');
     }
     function resizeOne(val) { document.getElementById('bigOne').style.fontSize = (20 * val) + "px"; }
-    function changeImg(val) { document.getElementById('imgName').textContent = "liminal" + val + ".png"; }
+    function changeImg(val) { document.getElementById('liminalImg').src = "liminal" + val + ".png"; }
     function addLog() {
         const log = document.getElementById('voidLog');
         log.innerHTML += "<br>LOG: Glitch detected...";
